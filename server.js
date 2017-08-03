@@ -6,9 +6,21 @@ var app = express();
 app.use(morgan('combined'));
 
 var articles ={
-    articleone:   
+    'article-one':   
+    {   title:'Article One | Dhruvil Prajapati',
+        heading:'Article One',
+        date:'Aug 3,2017',
+        content:`<p>
+                    This is demo article.I am doing course on IITM.
+                </p>
+                 <p>
+                    I am SharePoint Developer
+                 </p>`
+        
+    },
+    'article-two': 
     {
-        title:'Article One | Dhruvil Prajapati',
+       title:'Article One | Dhruvil Prajapati',
         heading:'Article One',
         date:'Aug 3,2017',
         content:`<p>
@@ -18,19 +30,7 @@ var articles ={
                     I am SharePoint Developer
                  </p>`
     },
-    article-two: 
-    {
-        title:'Article Two | Dhruvil Prajapati',
-        heading:'Article Two',
-        date:'Aug 4,2017',
-        content:`<p>
-                    This is demo article.I am doing course on IITM.
-                </p>
-                 <p>
-                    I am SharePoint Developer
-                 </p>`
-    },
-    article-three: 
+    'article-three': 
     {
         title:'Article One | Dhruvil Prajapati',
         heading:'Article Three',
@@ -92,8 +92,9 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-app.get('/article-one',function(req, res){
-    res.send(createTemplate(article-one)); 
+app.get('/:articleName',function(req, res){
+    var articleName = req.params.articleName;
+    res.send(createTemplate(articles[articleName])); 
 });
 
 app.get('/article-two',function(req, res){
